@@ -10,7 +10,7 @@ defmodule Mix.Tasks.Day do
       |> List.first()
       |> String.pad_leading(2, "0")
 
-    part = if List.last(args) === "2", do: "second", else: "first"
+    part = if List.last(args) === "2" and length(args) > 1, do: "second", else: "first"
 
     input = File.read!("test/support/day#{day}/input.txt")
 
