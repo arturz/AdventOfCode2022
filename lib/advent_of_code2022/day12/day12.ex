@@ -9,7 +9,7 @@ defmodule AdventOfCode2022.Day12 do
   def first_part(input) do
     %{map: map, goals: goals, pos: pos} = parse(input)
 
-    height = map |> Enum.filter(& &1 |> elem(0) |> Kernel.==(pos)) |> List.first() |> elem(1)
+    height = map |> Enum.filter(&(&1 |> elem(0) |> Kernel.==(pos))) |> List.first() |> elem(1)
 
     {pos, height, 0}
     |> List.wrap()
@@ -27,9 +27,9 @@ defmodule AdventOfCode2022.Day12 do
     else
       map
       |> successors(node)
-      |> Enum.reject(& elem(&1, 0) in explored_positions)
+      |> Enum.reject(&(elem(&1, 0) in explored_positions))
       |> IO.inspect()
-      |> Enum.reduce(fringe, & Qex.push(&2, &1))
+      |> Enum.reduce(fringe, &Qex.push(&2, &1))
       |> bfs(explored_positions, map, goals)
     end
   end
@@ -42,7 +42,7 @@ defmodule AdventOfCode2022.Day12 do
       {{tile_x, ^y}, _} when abs(tile_x - x) === 1 -> true
       _ -> false
     end)
-    |> Enum.map(& Tuple.append(&1, steps + 1))
+    |> Enum.map(&Tuple.append(&1, steps + 1))
   end
 
   defp parse(input) do
