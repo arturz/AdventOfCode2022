@@ -8,6 +8,6 @@ defmodule AdventOfCode2022.Day17Test do
   end
 
   test "example for the second part" do
-    assert "test/support/day17/example.txt" |> File.read!() |> second_part() === 1514285714288
+    assert "test/support/day17/example.txt" |> File.read!() |> second_part() === 1_514_285_714_288
   end
 end

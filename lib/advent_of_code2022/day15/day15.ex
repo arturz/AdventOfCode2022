@@ -13,10 +13,10 @@ defmodule AdventOfCode2022.Day15 do
     end)
     # |> Enum.at(6)
     # |> List.wrap()
-    |> IO.inspect
-    |> Enum.map(& get_scans_at_height(&1, y))
+    |> IO.inspect()
+    |> Enum.map(&get_scans_at_height(&1, y))
     |> Enum.reduce(&MapSet.union/2)
-    |> IO.inspect
+    |> IO.inspect()
     |> MapSet.size()
   end
 
