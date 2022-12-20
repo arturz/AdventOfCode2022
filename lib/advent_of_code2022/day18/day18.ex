@@ -22,16 +22,24 @@ defmodule AdventOfCode2022.Day18 do
     z = coords |> Enum.map(&elem(&1, 2)) |> Enum.sort()
 
     boundaries =
-      {List.first(x) - 1, List.last(x) + 1, List.first(y) - 1, List.last(y) + 1, List.first(z) - 1, List.last(z) + 1}
+      {List.first(x) - 1, List.last(x) + 1, List.first(y) - 1, List.last(y) + 1,
+       List.first(z) - 1, List.last(z) + 1}
 
-    flooded = flood_space(coords, [{elem(boundaries, 0), elem(boundaries, 2), elem(boundaries, 4)}], MapSet.new(), boundaries)
+    flooded =
+      flood_space(
+        coords,
+        [{elem(boundaries, 0), elem(boundaries, 2), elem(boundaries, 4)}],
+        MapSet.new(),
+        boundaries
+      )
 
     coords
     |> Enum.map(&(&1 |> get_flooded_space_around(flooded) |> length()))
     |> Enum.sum()
   end
 
-  @spec flood_space(MapSet.t(coord()), list(coord()), MapSet.t(coord()), boundaries()) :: MapSet.t(coord())
+  @spec flood_space(MapSet.t(coord()), list(coord()), MapSet.t(coord()), boundaries()) ::
+          MapSet.t(coord())
   def flood_space(_coords, [], flooded, _boundaries) do
     flooded
   end
